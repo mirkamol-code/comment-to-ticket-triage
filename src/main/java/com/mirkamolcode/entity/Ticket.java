@@ -22,7 +22,8 @@ public class Ticket {
 
     @Enumerated(EnumType.STRING)
     private Priority priority;
-
+    @Column(length = 2000)
+    private String summary;
     @OneToOne
     @JoinColumn(name = "comment_id")
     private Comment comment;
@@ -32,11 +33,12 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(UUID id, String title, Category category, Priority priority, Comment comment, LocalDateTime localDateTime) {
+    public Ticket(UUID id, String title, Category category, Priority priority, String summary, Comment comment, LocalDateTime localDateTime) {
         this.id = id;
         this.title = title;
         this.category = category;
         this.priority = priority;
+        this.summary = summary;
         this.comment = comment;
         this.localDateTime = localDateTime;
     }
@@ -71,6 +73,14 @@ public class Ticket {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public Comment getComment() {
