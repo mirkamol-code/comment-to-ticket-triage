@@ -3,10 +3,10 @@ package com.mirkamolcode.dto.api;
 import java.util.List;
 
 public record HuggingFaceResponse(
-        List<Comment> choices
+        List<Choice> choices
 ) {
     public record Choice(
-            Comment message
+            Comment comment
     ){}
     public record Comment(
             String content
