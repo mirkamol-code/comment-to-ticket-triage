@@ -6,7 +6,7 @@ public record HuggingFaceResponse(
         List<Choice> choices
 ) {
     public record Choice(
-            Comment comment
+            Comment message
     ){}
     public record Comment(
             String content
