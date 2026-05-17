@@ -4,7 +4,7 @@ import java.util.List;
 
 public record HuggingFaceRequest(
         String model,
-        List<HuggingFaceComment> comments,
+        List<HuggingFaceComment> messages,
         boolean stream
 ) {
 }

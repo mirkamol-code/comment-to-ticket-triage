@@ -1,0 +1,31 @@
+package com.mirkamolcode.controller;
+
+import com.mirkamolcode.dto.TicketResponse;
+import com.mirkamolcode.service.TicketService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.UUID;
+
+@RestController
+@RequestMapping("/leads")
+public class TicketController {
+    private final TicketService ticketService;
+
+    public TicketController(TicketService ticketService) {
+        this.ticketService = ticketService;
+    }
+
+    @GetMapping
+    public List<TicketResponse> getAll(){
+        return ticketService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public TicketResponse getById(@PathVariable UUID id){
+        return ticketService.getById(id);
+    }
+}

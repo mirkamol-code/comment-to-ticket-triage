@@ -1,22 +1,22 @@
 server:
   port: 8080
   servlet:
-    context-path: /api
+    context-path: /api/v1
 spring:
   application:
     name: comment-to-ticket-triage
   datasource:
     username: mirkamol
-    password: password
+    password:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/comments_db
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: false
         show_sql: false
 ai:
   huggingface:
-    token: "hf_ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    token: ""
