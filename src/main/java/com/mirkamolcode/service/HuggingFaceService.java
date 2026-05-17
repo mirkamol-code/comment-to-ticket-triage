@@ -22,29 +22,46 @@ public class HuggingFaceService {
 
     public AiTicketResponse analyzeMessage(String content) {
         String prompt = """
-                 Analyze this inbound message.
+                You are an AI assistant that classifies inbound business messages.
                 
-                                Decide if it should become a qualified lead.
+                Analyze the message and determine whether it should become a qualified lead.
                 
-                                Return ONLY valid JSON.
+                Return ONLY raw valid JSON.
+                Do NOT use markdown.
+                Do NOT use ```json.
+                Do NOT add explanations or extra text.
                 
-                                {
-                                  "qualified": true,
-                                  "title": "short title",
-                                  "type": "bug | feature | billing | account | other",
-                                  "urgency": "low | medium | high",
-                                  "summary": "short summary"
-                                }
+                Required JSON structure:
                 
-                                Rules:
-                                - type MUST be exactly one of:
-                                  bug, feature, billing, account, other
+                {
+                  "qualified": true,
+                  "title": "Short professional title",
+                  "category": "BUG | FAILURE | BILLING | ACCOUNT | OTHER",
+                  "priority": "LOW | MEDIUM | HIGH",
+                  "summary": "Concise professional summary"
+                }
                 
-                                - urgency MUST be exactly one of:
-                                  low, medium, high
+                Rules:
+                - category MUST be exactly one of:
+                  BUG, FAILURE, BILLING, ACCOUNT, OTHER
                 
-                                Message:
-                                %s
+                - priority MUST be exactly one of:
+                  LOW, MEDIUM, HIGH
+                
+                - Return enum values in uppercase only
+                - Summary must be rewritten professionally
+                - Do NOT copy the original message directly
+                - Keep summary short and clear
+                
+                Classification guidelines:
+                - BUG → technical errors, crashes, broken APIs
+                - FAILURE → outages, malfunctioning systems, broken workflows
+                - BILLING → invoices, payments, pricing, double charges
+                - ACCOUNT → login, password, account access issues
+                - OTHER → anything else
+                
+                Message:
+                %s
                 """.formatted(content);
 
         HuggingFaceRequest huggingFaceRequest = new HuggingFaceRequest(
@@ -59,7 +76,7 @@ public class HuggingFaceService {
 
             String aiJson = response.choices()
                     .getFirst()
-                    .comment()
+                    .message()
                     .content();
 
             return objectMapper.readValue(aiJson, AiTicketResponse.class);
@@ -69,6 +86,5 @@ public class HuggingFaceService {
                     e
             );
         }
-
     }
 }
