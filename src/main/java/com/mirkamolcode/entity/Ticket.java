@@ -43,6 +43,14 @@ public class Ticket {
         this.localDateTime = localDateTime;
     }
 
+    public Ticket(String title, Category category, Priority priority, String summary, Comment comment) {
+        this.title = title;
+        this.category = category;
+        this.priority = priority;
+        this.summary = summary;
+        this.comment = comment;
+    }
+
     public UUID getId() {
         return id;
     }

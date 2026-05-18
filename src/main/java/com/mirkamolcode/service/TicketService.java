@@ -2,6 +2,7 @@ package com.mirkamolcode.service;
 
 import com.mirkamolcode.dto.TicketResponse;
 import com.mirkamolcode.entity.Ticket;
+import com.mirkamolcode.exception.ResourceNotFoundException;
 import com.mirkamolcode.repository.TicketRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class TicketService {
     }
     public TicketResponse getById(UUID id) {
         Ticket ticket = ticketRepository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("Ticket not found"));
 
         return mapToTicketResponse(ticket);
     }

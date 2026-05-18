@@ -32,6 +32,11 @@ public class Comment {
         this.createdAt = createdAt;
     }
 
+    public Comment(String senderEmail, String content) {
+        this.senderEmail = senderEmail;
+        this.content = content;
+    }
+
     public UUID getId() {
         return id;
     }
