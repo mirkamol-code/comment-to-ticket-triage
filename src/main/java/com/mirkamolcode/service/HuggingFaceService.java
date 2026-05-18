@@ -5,6 +5,7 @@ import com.mirkamolcode.dto.AiTicketResponse;
 import com.mirkamolcode.dto.api.HuggingFaceComment;
 import com.mirkamolcode.dto.api.HuggingFaceRequest;
 import com.mirkamolcode.dto.api.HuggingFaceResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import tools.jackson.databind.ObjectMapper;
 
@@ -14,6 +15,8 @@ import java.util.List;
 public class HuggingFaceService {
     private final HttpClient client;
     private final ObjectMapper objectMapper;
+    @Value("${ai.huggingface.model}")
+    private String huggingFaceModel;
 
     public HuggingFaceService(HttpClient client, ObjectMapper objectMapper) {
         this.client = client;
@@ -65,7 +68,7 @@ public class HuggingFaceService {
                 """.formatted(content);
 
         HuggingFaceRequest huggingFaceRequest = new HuggingFaceRequest(
-                "meta-llama/Llama-3.3-70B-Instruct:groq",
+                huggingFaceModel,
                 List.of(
                         new HuggingFaceComment("system", "You are lead qualification assistant"),
                         new HuggingFaceComment("user", prompt)),

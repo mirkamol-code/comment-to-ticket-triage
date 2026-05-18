@@ -19,4 +19,5 @@ spring:
         show_sql: false
 ai:
   huggingface:
+    model: "meta-llama/Llama-3.3-70B-Instruct:groq"
     token: ""
