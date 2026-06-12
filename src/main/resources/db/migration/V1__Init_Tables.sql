@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS comment (
     sender_email VARCHAR(254) NOT NULL,
     content VARCHAR(2000) NOT NULL,
     created_at TIMESTAMP NOT NULL
-    );
+);
 
 CREATE TABLE IF NOT EXISTS ticket (
     id UUID PRIMARY KEY,
@@ -20,4 +20,4 @@ CREATE TABLE IF NOT EXISTS ticket (
     FOREIGN KEY (comment_id)
     REFERENCES comment (id)
     ON DELETE CASCADE
-    );
+);
