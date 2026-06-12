@@ -13,6 +13,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column
     private String senderEmail;
 
     @Column(length = 2000)

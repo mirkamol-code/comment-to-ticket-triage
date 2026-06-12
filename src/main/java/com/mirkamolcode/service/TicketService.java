@@ -36,7 +36,7 @@ public class TicketService {
                 ticket.getCategory(),
                 ticket.getPriority(),
                 ticket.getSummary(),
-                ticket.getLocalDateTime()
+                ticket.getCreatedAt()
         );
     }
 
