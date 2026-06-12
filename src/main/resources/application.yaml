@@ -12,11 +12,14 @@ spring:
     url: jdbc:postgresql://localhost:5432/comments_db
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
-        format_sql: false
-        show_sql: false
+        format_sql: true
+        show_sql: true
+  web:
+    error:
+      include-message: always
 ai:
   huggingface:
     token: ""

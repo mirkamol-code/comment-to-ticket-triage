@@ -15,6 +15,7 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column
     private String title;
 
     @Enumerated(EnumType.STRING)
@@ -27,20 +28,22 @@ public class Ticket {
     @OneToOne
     @JoinColumn(name = "comment_id")
     private Comment comment;
+
+    @Column(updatable = false)
     @CreationTimestamp
-    private LocalDateTime localDateTime;
+    private LocalDateTime createdAt;
 
     public Ticket() {
     }
 
-    public Ticket(UUID id, String title, Category category, Priority priority, String summary, Comment comment, LocalDateTime localDateTime) {
+    public Ticket(UUID id, String title, Category category, Priority priority, String summary, Comment comment, LocalDateTime createdAt) {
         this.id = id;
         this.title = title;
         this.category = category;
         this.priority = priority;
         this.summary = summary;
         this.comment = comment;
-        this.localDateTime = localDateTime;
+        this.createdAt = createdAt;
     }
 
     public Ticket(String title, Category category, Priority priority, String summary, Comment comment) {
@@ -99,23 +102,23 @@ public class Ticket {
         this.comment = comment;
     }
 
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
+    public void setCreatedAt(LocalDateTime localDateTime) {
+        this.createdAt = localDateTime;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
-        return Objects.equals(id, ticket.id) && Objects.equals(title, ticket.title) && category == ticket.category && priority == ticket.priority && Objects.equals(comment, ticket.comment) && Objects.equals(localDateTime, ticket.localDateTime);
+        return Objects.equals(id, ticket.id) && Objects.equals(title, ticket.title) && category == ticket.category && priority == ticket.priority && Objects.equals(comment, ticket.comment) && Objects.equals(createdAt, ticket.createdAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, category, priority, comment, localDateTime);
+        return Objects.hash(id, title, category, priority, comment, createdAt);
     }
 }
