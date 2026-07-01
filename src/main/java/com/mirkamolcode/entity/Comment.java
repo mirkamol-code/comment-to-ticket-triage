@@ -26,11 +26,10 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(UUID id, String senderEmail, String content, LocalDateTime createdAt) {
+    public Comment(UUID id, String senderEmail, String content) {
         this.id = id;
         this.senderEmail = senderEmail;
         this.content = content;
-        this.createdAt = createdAt;
     }
 
     public Comment(String senderEmail, String content) {

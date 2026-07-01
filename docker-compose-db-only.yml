@@ -1,0 +1,22 @@
+services:
+  db-local-postgres:
+    container_name: comments-postgres-local
+    image: postgres
+    environment:
+      POSTGRES_USER: mirkamol
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: comments_db
+    ports:
+      - "5333:5432"
+    restart: unless-stopped
+    volumes:
+      - db-local:/data/postgres
+    networks:
+      - amigos
+
+networks:
+  amigos:
+    driver: bridge
+
+volumes:
+  db-local:

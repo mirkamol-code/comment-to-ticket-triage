@@ -1,0 +1,36 @@
+services:
+  product-service:
+    container_name: comment
+    #      image: amigoscode/product-service:jibMaven
+    build:
+      context: .
+      dockerfile: docker-compose-db-only.yml
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/comments_db
+      SPRING_DATASOURCE_USERNAME: mirkamol
+      SPRING_DATASOURCE_PASSWORD: password
+    ports:
+      - "8090:8080"
+    networks:
+      - amigos
+  db:
+    container_name: comments_db-postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: mirkamol
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: comments_db
+    ports:
+      - "5333:5432"
+    restart: unless-stopped
+    volumes:
+      - db:/data/postgres
+    networks:
+      - amigos
+
+networks:
+  amigos:
+    driver: bridge
+
+volumes:
+  db:
