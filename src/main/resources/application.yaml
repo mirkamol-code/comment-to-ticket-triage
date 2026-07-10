@@ -7,7 +7,7 @@ spring:
     name: comment-to-ticket-triage
   datasource:
     username: mirkamol
-    password:
+    password: password
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5333/comments_db
   jpa:
