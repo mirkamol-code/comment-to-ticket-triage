@@ -36,7 +36,7 @@ jobs:
       - name: Maven Clean Verify
         run: mvn -B -ntp clean verify jib:build -Ddocker.image.tag=$BUILD_NUMBER
       - name: Setup SSH Agent
-      - uses: webfactory/ssh-agent@v0.9.0
+        uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ env.EC2_SSH_PRIVATE_KEY }}
       - name: SSH To EC2 and Deploy
