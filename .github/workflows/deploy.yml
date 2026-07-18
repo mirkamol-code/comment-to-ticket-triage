@@ -23,7 +23,7 @@ jobs:
           java-version: '21'
       - name: Generate Build Number
         run: |
-          BUILD_NUMBER=$(date+'%d%m%Y%H%M%S')
+          BUILD_NUMBER=$(date +'%d%m%Y%H%M%S')
           echo "BUILD_NUMBER=$BUILD_NUMBER" >> $GITHUB_ENV
           echo "Generated Build Number: $BUILD_NUMBER"
       - name: Login to Docker Hub
