@@ -6,6 +6,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      HUGGINGFACE_API_TOKEN: ${{ secrets.AI_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

@@ -22,4 +22,4 @@ spring:
       include-message: always
 ai:
   huggingface:
-    token: ""
+    token: ${HUGGINGFACE_API_TOKEN:}
