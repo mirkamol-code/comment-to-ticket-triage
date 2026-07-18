@@ -27,8 +27,11 @@
         <url/>
     </scm>
     <properties>
-        <java.version>25</java.version>
+        <java.version>21</java.version>
         <testcontainers.version>2.0.5</testcontainers.version>
+        <docker.username>mirkamolcode</docker.username>
+        <docker.image.name>smart-lead</docker.image.name>
+        <docker.image.tag/>
     </properties>
     <dependencies>
 
@@ -141,6 +144,34 @@
                         <include>**/*IntegrationTest.java</include>
                         <include>**/*IT.java</include>
                     </includes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.4.6</version>
+
+                <configuration>
+                    <from>
+                        <image>eclipse-temurin:21-jre</image>
+                        <platforms>
+                            <platform>
+                                <architecture>amd64</architecture>
+                                <os>linux</os>
+                            </platform>
+                            <platform>
+                                <architecture>arm64</architecture>
+                                <os>linux</os>
+                            </platform>
+                        </platforms>
+                    </from>
+
+                    <to>
+                        <image>docker.io/${docker.username}/${docker.image.name}:${docker.image.tag}</image>
+                        <tags>
+                            <tag>latest</tag>
+                        </tags>
+                    </to>
                 </configuration>
             </plugin>
         </plugins>
