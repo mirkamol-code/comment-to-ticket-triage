@@ -17,9 +17,15 @@ jobs:
       HUGGINGFACE_API_TOKEN: ${{ secrets.AI_TOKEN }}
       EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
       EC2_PUBLIC_IP_ADDRESS: ${{ secrets.EC2_PUBLIC_IP_ADDRESS }}
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Send slack messages with github commit url
+        run: >
+          curl -X POST -H 'Content-type: application/json' 
+          --data '{"text":"${{ github.event.head_commit.message }} - https://${{ github.repository }}/commit/${{ github.sha }}"}' 
+          ${{ env.SLACK_WEBHOOK_URL }}
       - name: JDK
         uses: actions/setup-java@v4
         with:
@@ -52,3 +58,9 @@ jobs:
             docker ps
             echo "$BUILD_NUMBER" > build-number.txt
           EOF
+      - name: Send slack messages with github commit url
+        if: always()
+        run: >
+          curl -X POST -H 'Content-type: application/json' 
+          --data '{"text":"Job status: ${{ job.status }}"}' 
+          ${{ env.SLACK_WEBHOOK_URL }}
