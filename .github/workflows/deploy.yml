@@ -60,7 +60,7 @@ jobs:
 
       - name: SSH To EC2 and Deploy
         run: |
-          curl -X POST -H "Content-type: application/json" \ 
+          curl -X POST -H "Content-type: application/json" \
           --data '{"text":"🚀 Starting deployment to EC2..."}' \
           "$SLACK_WEBHOOK_URL"
           
