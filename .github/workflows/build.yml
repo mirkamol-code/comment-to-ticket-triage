@@ -1,0 +1,20 @@
+name: Build workflow
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      HUGGINGFACE_API_TOKEN: ${{ secrets.AI_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+      - name: Maven Clean Verify
+        run: mvn -B -ntp clean verify
